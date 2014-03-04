@@ -10,39 +10,31 @@ var snail = function(arr) {
     while (sorted.length/n < n ) {
 
         //rigth
-        if (i === (aux) && n > i) {
-            console.log('rigth');
+        if (i === (aux) && n > i) {console.log('rigth');
             j = aux ;
 
-            while (j < (n-aux)) {
+            while (j < (n -aux)) {
                 sorted.push(arr[i][j]);             
                 j++;
             }
             j--;
-            i++;
 
         } 
         //down
-        if (i !== aux && j > i && i < n && j < n) {console.log('down');
-            while(i <= j){
-               // console.log(i,j);
+        else if (i !== aux && j > i && i < n && j < n) {console.log('down');
             sorted.push(arr[i][j]);
-            i++;
-            }
-            
         }
         //left
-        if (i == n && !iFinal) {i--;console.log('left');
+        else if (i == n && !iFinal) {console.log('left');
             iFinal = true;
-            //i--;
+            i--;
             i = i-aux;
-
-            while (j > aux ) {
+            while (i >= aux ) {
                 //j--;
 
-                sorted.push(arr[i][j]);
+                sorted.push(arr[j][i]);
                 
-                j--;
+                i--;
 
             }
             i = j;
@@ -65,21 +57,25 @@ var snail = function(arr) {
                 aux++;
         }
 
-        
-   n2++;
-   if(n2 === 100){
-    break;
-   }    
+        i++;
+       
 
     }
     return sorted;
 };
+
 
 var test;
 
 test = function(input, expected) {
     var output;
     output = snail(input);
+    var results = document.getElementById('results');
+    var dive = document.createElement('div');
+    console.log(results);
+    dive.innerHTML = "Expected " + expected + " but got " + output;
+    dive.className = (""+expected)===(""+output)? 'isa_success' : 'isa_error'; 
+    results.appendChild(dive);
     console.log(("" + expected) === ("" + output), "Expected " + expected + " but got " + output);
 };
 
